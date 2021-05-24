@@ -1,5 +1,5 @@
 #################################################################################################
-## ETL TheShinISS -> BRAHMS ####
+## ETL  ARS -> TheShinISS ####
 
 # Version 1.0
 # 21-05-2021
@@ -14,7 +14,7 @@ thisdir<-dirname(rstudioapi::getSourceEditorContext()$path)
 setwd(thisdir)
 
 #load parameters
-source(paste0(thisdir,"/parameters.R"))
+source(paste0(thisdir,"/parameters_toTheShinISS.R"))
 setwd(thisdir)
 
 # Read and check data -----------------------------------------------------
