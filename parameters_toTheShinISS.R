@@ -36,7 +36,7 @@ date_format<-"%Y%m%d"
 # fup<-3*365.25
 
 # List all datasets:
-spa<-paste0("SPA",rep(2007:2019))
+spa<-paste0("SPA",rep(2017:2019))
 num<-c()
 for (i in rep(01:12)) {
   if(nchar(i)==1) {
@@ -45,7 +45,7 @@ for (i in rep(01:12)) {
   }
 }
 num<-c(num, 10:12)
-spa_m<-paste0(spa,rep(num,each=13))
+#☺spa_m<-paste0(spa,rep(num,each=13))
 
 spf<-paste0("SPF",rep(2017:2019))
 #spf_m<-paste0(spf,rep(num,each=13))[156]
@@ -57,12 +57,12 @@ alldatasets<-c("ID","ANA","EXE","FED","SDO", spf_m)
 
 
 
-library(haven)
-ANAFULL <- as.data.table(read_dta("g_simulated/ANAFULL.dta"))
-View(ANAFULL)
-ANAFULL$IDUNI<-as.data.table(gsub("COVAC210309","BRAHMS210524",ANAFULL$IDUNI))
-write.dta(ANAFULL, file=paste0(thisdir,"/g_simulated/ANAFULL.dta"))
-rm(ANAFULL)
-
-replace IDUNI = "BRAHMS210524" +substr( IDUNI, 12, .) # rimpiazza con "XXXX" più la variabile originale dalla posizione 6 in poi
+# library(haven)
+# ANAFULL <- as.data.table(read_dta("g_simulated/ANAFULL.dta"))
+# View(ANAFULL)
+# ANAFULL$IDUNI<-as.data.table(gsub("COVAC210309","BRAHMS210524",ANAFULL$IDUNI))
+# write.dta(ANAFULL, file=paste0(thisdir,"/g_simulated/ANAFULL.dta"))
+# rm(ANAFULL)
+# 
+# replace IDUNI = "BRAHMS210524" +substr( IDUNI, 12, .) # rimpiazza con "XXXX" più la variabile originale dalla posizione 6 in poi
 
