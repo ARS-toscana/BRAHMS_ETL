@@ -5,6 +5,8 @@ if (!require("haven")) install.packages("haven")
 library(haven)
 if (!require("lubridate")) install.packages("lubridate")
 library(lubridate)
+if (!require("stringr")) install.packages("stringr")
+library(stringr)
 
 # Define folders:
 diroutput<-paste0(thisdir,"/20210526_BRAHMS_CDM/")
@@ -51,4 +53,4 @@ date_format<-"%Y%m%d"
 # cap<-paste0("CAP",rep(1:2))
 # #fed<-paste0("FED",rep(2007:2019))
 
-alldatasets<-c("ID","ANA","EXE","FED","SDO", spf)
+#alldatasets<-c("ID","ANA","EXE","FED","SDO", spf)
