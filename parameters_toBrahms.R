@@ -7,8 +7,8 @@ if (!require("lubridate")) install.packages("lubridate")
 library(lubridate)
 
 # Define folders:
-diroutput<-paste0(thisdir,"/20210518_output/")
-dirinput<-paste0(thisdir,"/input_corrected/")
+diroutput<-paste0(thisdir,"/20210526_BRAHMS_CDM/")
+dirinput<-paste0(thisdir,"/20210525_TheShinISS_CDM/")
 dirtemp<-paste0(thisdir,"/temp/")
 
 # Check if those folders exist
@@ -35,20 +35,20 @@ date_format<-"%Y%m%d"
 # lookback<-5*365.25
 # fup<-3*365.25
 
-# List all datasets:
-spa<-paste0("SPA",rep(2007:2019))
-# num<-c()
-# for (i in rep(01:12)) {
-#   if(nchar(i)==1) {
-#     rep<-paste0(0,i)
-#     num<-c(num,rep)
-#   }
-# }
-# num<-c(num, 10:12)
-# spa_m<-paste0(spa,rep(num,each=13))
-
-spf<-paste0("SPF",rep(2007:2019)) 
-cap<-paste0("CAP",rep(1:2))
-#fed<-paste0("FED",rep(2007:2019))
+# # List all datasets:
+# spa<-paste0("SPA",rep(2007:2019))
+# # num<-c()
+# # for (i in rep(01:12)) {
+# #   if(nchar(i)==1) {
+# #     rep<-paste0(0,i)
+# #     num<-c(num,rep)
+# #   }
+# # }
+# # num<-c(num, 10:12)
+# # spa_m<-paste0(spa,rep(num,each=13))
+# 
+# spf<-paste0("SPF",rep(2007:2019)) 
+# cap<-paste0("CAP",rep(1:2))
+# #fed<-paste0("FED",rep(2007:2019))
 
 alldatasets<-c("ID","ANA","EXE","FED","SDO", spf)

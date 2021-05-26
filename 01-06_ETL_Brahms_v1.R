@@ -14,7 +14,7 @@ thisdir<-dirname(rstudioapi::getSourceEditorContext()$path)
 setwd(thisdir)
 
 #load parameters
-source(paste0(thisdir,"/parameters.R"))
+source(paste0(thisdir,"/parameters_toBrahms.R"))
 setwd(thisdir)
 
 # Read and check data -----------------------------------------------------

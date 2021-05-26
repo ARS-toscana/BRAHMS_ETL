@@ -7,7 +7,7 @@ if (!require("lubridate")) install.packages("lubridate")
 library(lubridate)
 
 # Define folders:
-diroutput<-paste0(thisdir,"/20210525_output/")
+diroutput<-paste0(thisdir,"/20210525_TheShinISS_CDM/")
 dirinput<-paste0(thisdir,"/g_simulated/")
 dirtemp<-paste0(thisdir,"/temp/")
 
