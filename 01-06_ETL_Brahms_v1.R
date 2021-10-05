@@ -358,23 +358,24 @@ setkeyv(ANAGRAFE_ASSISTITI,"id")
 
 ## PERSONS:
   # Action: all rows of ANAGRAFE_ASSISTITI for the same person_id have the same variables below, so one single row of PERSONS is generated
-PERSONS<-ANAGRAFE_ASSISTITI
 
-#create person_id as number that identifier uniquly person, used to link across tables. (Primary key)
-PERSONS<-PERSONS[,person_id:=1:.N]
-PERSONS<-copy(ANAGRAFE_ASSISTITI)
+#create person_id as number that identifier uniquely person, used to link across tables. (Primary key)
+PERSONS<-copy(ANAFULL)
 
 #renamed vars
-setnames(PERSONS,"id","person_id_src")
-setnames(PERSONS,"datanas","birth_date")
-setnames(PERSONS,"datadec","death_date")
-setnames(PERSONS,"sesso","sex")
+setnames(PERSONS,"ID","person_id_src")
+setnames(PERSONS,"DATA_NASCITA","birth_date")
+setnames(PERSONS,"DATA_MORTE_MARSI","death_date")
+setnames(PERSONS,"SESSO","sex")
+
+# make the data unique
+PERSONS<-unique(PERSONS[,.(person_id_src,birth_date,sex,death_date)])
 
 # keep only needed vars.
+PERSONS<-PERSONS[,person_id:=1:.N]
 PERSONS<-PERSONS[,.(person_id,person_id_src,birth_date,sex,death_date)]
 
 fwrite(PERSONS, paste0(diroutput,"/PERSONS.csv"), quote = "auto")
-
 
 
 ## OBSERVATION_PERIODS: 
