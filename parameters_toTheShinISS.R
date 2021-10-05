@@ -45,7 +45,7 @@ for (i in rep(01:12)) {
   }
 }
 num<-c(num, 10:12)
-#☺spa_m<-paste0(spa,rep(num,each=13))
+#spa_m<-paste0(spa,rep(num,each=13))
 
 spf<-paste0("SPF",rep(2017:2019))
 #spf_m<-paste0(spf,rep(num,each=13))[156]
@@ -53,7 +53,7 @@ spf<-paste0("SPF",rep(2017:2019))
 cap<-paste0("CAP",rep(1:2))
 fed<-paste0("FED",rep(2017:2019))
 
-alldatasets<-c("ID","ANA","EXE","FED","SDO", spf_m)
+#alldatasets<-c("ID","ANA","EXE","FED","SDO", spf_m)
 
 
 

@@ -62,8 +62,11 @@ setnames(RICOVERI_OSPEDALIERI, old = "REPDIM", new = "repartodim")
 # setnames(RICOVERI_OSPEDALIERI, old = "REP2", new = "repartotras2")
 # setnames(RICOVERI_OSPEDALIERI, old = "REP3", new = "repartotras3")
 setnames(RICOVERI_OSPEDALIERI, old = "MODIM", new = "tipdim")
+setnames(RICOVERI_OSPEDALIERI, old = "DRG", new = "drg")
 #setnames(RICOVERI_OSPEDALIERI, old = "codosp", new = "cod_struttura")
 
+# chenge modality to tipdim
+RICOVERI_OSPEDALIERI<-RICOVERI_OSPEDALIERI[tipdim=="2" |tipdim=="3" |tipdim=="4" | tipdim=="5" | tipdim=="7" | tipdim=="A" | tipdim=="10" | tipdim=="11",tipdim:=0][tipdim=="1",tipdim:=2][tipdim=="6" |tipdim=="8" |tipdim=="9" ,tipdim:=1][tipdim=="99" |tipdim=="999" ,tipdim:=3]
 
 # keep only which needed
 RICOVERI_OSPEDALIERI <- RICOVERI_OSPEDALIERI[,.(id, codcmp, codcm1, codcm2, codcm3, codcm4, codcm5, intproc, intsec1, intsec2, intsec3, intsec4, intsec5, data_a, data_d, regric, repartoam,repartodim, drg, tipdim)] # repartotras1, repartotras2, repartotras3, , cod_struttura
@@ -72,10 +75,10 @@ fwrite(RICOVERI_OSPEDALIERI, paste0(diroutput,"RICOVERI_OSPEDALIERI_SDO.csv"), q
 
 
 rm(SDO)
-rm(RICOVERI_OSPEDALIERI_SDO)
+rm(RICOVERI_OSPEDALIERI)
 
 
-# 1a. Use SDOTEMP to populate VISIT_OCCURRENCE, then EVENTS, PROCEDURES and MEDICAL_OBSERVATIONS,PERSONS and OBSERVATIONS_PERIODS --------
+# 1a. Use SDOTEMP to populate RICOVERI_OSPEDALIERI --------
 
 SDOTEMP <- as.data.table(read_dta(paste0(dirinput,"/SDOTEMP.dta")))
 setkeyv(SDOTEMP,"IDUNI")
@@ -106,6 +109,7 @@ setnames(RICOVERI_OSPEDALIERI, old = "REPDIM", new = "repartodim")
 # setnames(RICOVERI_OSPEDALIERI, old = "REP2", new = "repartotras2")
 # setnames(RICOVERI_OSPEDALIERI, old = "REP3", new = "repartotras3")
 setnames(RICOVERI_OSPEDALIERI, old = "MODIM", new = "tipdim")
+setnames(RICOVERI_OSPEDALIERI, old = "DRG", new = "drg")
 #setnames(RICOVERI_OSPEDALIERI, old = "codosp", new = "cod_struttura")
 
 
@@ -144,7 +148,7 @@ for (source in spa){
   fwrite(pippo, paste0(diroutput,"/",paste0("SPECIALISTICA_SPA_",substr(source,4,7)),".csv"), quote = "auto")
   
 }
-rm(pippo)
+rm(pippo, pluto)
 
 
 rm(list=ls(pattern="^SPA"))
@@ -247,12 +251,13 @@ for (source in fed){
   setkeyv(pippo,"IDUNI")
   
   setnames(pippo, old="IDUNI",new="id")
-  setnames(pippo, old="DATAERO",new="dataprest")
+  setnames(pippo, old="DATAERO",new="datasped")
   setnames(pippo, old="CODFARM",new="aic")
   setnames(pippo, old="PEZZI_ARSNEW",new="pezzi")
+  setnames(pippo, old="COD_ATC5",new="atc")
   
 
-  pippo<-pippo[,.(id,dataprest,aic,pezzi)] 
+  pippo<-pippo[,.(id,datasped,aic,atc,pezzi)] 
   
   
   assign(paste0("PRESCRIZIONI_FARMACI_",substr(source,4,7)),pippo)
@@ -279,9 +284,11 @@ rm(list=ls(pattern="^PRESCRIZIONI_FARMACI"))
 #   setnames(pippo, old="DATAERO",new="dataprest")
 #   setnames(pippo, old="CODFARM",new="aic")
 #   setnames(pippo, old="PEZZI_ARSNEW",new="pezzi")
+#   setnames(pippo, old="COD_ATC5",new="atc")
+
 #   
 #   
-#   pippo<-pippo[,.(id,dataprest,aic,pezzi)] 
+#   pippo<-pippo[,.(id,dataprest,aic,atc,pezzi)] 
 #   
 #   
 #   assign(paste0("PRESCRIZIONI_FARMACI_",substr(source,4,7)),pippo)
@@ -305,12 +312,13 @@ for (source in spf){
   setkeyv(pippo,"IDUNI")
   
   setnames(pippo, old="IDUNI",new="id")
-  setnames(pippo, old="DATAERO",new="dataprest")
+  setnames(pippo, old="DATAERO",new="datasped")
   setnames(pippo, old="CODFARM",new="aic")
   setnames(pippo, old="NUMFARM",new="pezzi")
+  setnames(pippo, old="COD_ATC5",new="atc")
   
   
-  pippo<-pippo[,.(id,dataprest,aic,pezzi)] 
+  pippo<-pippo[,.(id,datasped,aic,atc,pezzi)] 
   
   
   assign(paste0("PRESCRIZIONI_FARMACI_",substr(source,4,7)),pippo)
@@ -765,7 +773,7 @@ ANAGRAFE_ASSISTITI<-ANAGRAFE_ASSISTITI[,.(id,sesso,datanas,data_inizioass,data_f
 
 fwrite(ANAGRAFE_ASSISTITI, paste0(diroutput,"/ANAGRAFE_ASSISTITI.csv"), quote = "auto")
 
-rm(ANAFULL)
+rm(ANA)
 
 
 # NO - 17. Use COVID_DATASET to populate  SURVEY_ID, SURVEY_OBSERVATION -------------------------------------
@@ -849,3 +857,4 @@ rm(ANAFULL)
 # 
 # 
 # 
+

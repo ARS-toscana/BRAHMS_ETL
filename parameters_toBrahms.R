@@ -1,3 +1,10 @@
+
+###########################################################
+# insert name of your DAP (i.e. "ARS","DepLazio","Messina")
+DAP<-"ARS"
+###########################################################
+
+
 # Call library:
 if (!require("data.table")) install.packages("data.table")
 library(data.table)
@@ -32,25 +39,16 @@ setwd(thisdir)
 
 # Define parameters:
 date_format<-"%Y%m%d"
+date_end<-"9999-12-31"
+end_study<-as.Date("2020-12-31")
 # upper_date<- as.Date(as.character(20160630), date_format)
 # lower_date<- as.Date(as.character(20110601), date_format)
 # lookback<-5*365.25
 # fup<-3*365.25
 
-# # List all datasets:
-# spa<-paste0("SPA",rep(2007:2019))
-# # num<-c()
-# # for (i in rep(01:12)) {
-# #   if(nchar(i)==1) {
-# #     rep<-paste0(0,i)
-# #     num<-c(num,rep)
-# #   }
-# # }
-# # num<-c(num, 10:12)
-# # spa_m<-paste0(spa,rep(num,each=13))
-# 
-# spf<-paste0("SPF",rep(2007:2019)) 
-# cap<-paste0("CAP",rep(1:2))
-# #fed<-paste0("FED",rep(2007:2019))
 
-#alldatasets<-c("ID","ANA","EXE","FED","SDO", spf)
+##Define study parameters
+derm_specility_sdo<-c("52") #inizia per 52
+derm_specility_spa<-c("52") #reparto 052
+
+
