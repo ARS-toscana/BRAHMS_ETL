@@ -360,13 +360,13 @@ setkeyv(ANAGRAFE_ASSISTITI,"id")
   # Action: all rows of ANAGRAFE_ASSISTITI for the same person_id have the same variables below, so one single row of PERSONS is generated
 
 #create person_id as number that identifier uniquely person, used to link across tables. (Primary key)
-PERSONS<-copy(ANAFULL)
+PERSONS<-copy(ANAGRAFE_ASSISTITI)
 
 #renamed vars
-setnames(PERSONS,"ID","person_id_src")
-setnames(PERSONS,"DATA_NASCITA","birth_date")
-setnames(PERSONS,"DATA_MORTE_MARSI","death_date")
-setnames(PERSONS,"SESSO","sex")
+setnames(PERSONS,"id","person_id_src")
+setnames(PERSONS,"datanas","birth_date")
+setnames(PERSONS,"datadec","death_date")
+setnames(PERSONS,"sesso","sex")
 
 # make the data unique
 PERSONS<-unique(PERSONS[,.(person_id_src,birth_date,sex,death_date)])
@@ -396,7 +396,7 @@ setnames(OBSERVATION_PERIODS,"sesso","sex")
 # create obs_period_end_reason
 OBSERVATION_PERIODS<-OBSERVATION_PERIODS[obs_period_end_date==date_end, obs_period_end_reason:=1]
 OBSERVATION_PERIODS<-OBSERVATION_PERIODS[obs_period_end_date==death_date, obs_period_end_reason:=2]
-OBSERVATION_PERIODS<-OBSERVATION_PERIODS[!is.na(death_date) & (obs_period_end_date!=death_date & obs_period_end_date!=date_end), obs_period_end_reason:=3] 
+OBSERVATION_PERIODS<-OBSERVATION_PERIODS[is.na(death_date) & obs_period_end_date!=date_end, obs_period_end_reason:=3] 
 
 # keep only needed vars.
 OBSERVATION_PERIODS<-OBSERVATION_PERIODS[,.(obs_period_id,person_id,source,obs_period_start_date,obs_period_end_date,obs_period_end_reason)]
