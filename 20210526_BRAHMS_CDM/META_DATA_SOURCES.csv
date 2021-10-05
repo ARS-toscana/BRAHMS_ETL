@@ -1,0 +1,10 @@
+source;source_name;source_from_date;source_to_date;item_table_contrib;item_setting_contrib;comments
+DNPR;Danish national patient register;1977-01-01;2019-04-22;CLINICAL_ITEMS;1;
+DNPR;Danish national patient register;1995-01-01;2019-04-22;CLINICAL_ITEMS;2;
+DNPR;Danish national patient register;1995-01-01;2019-04-22;CLINICAL_ITEMS;3;
+DNPR;Danish national patient register;1995-01-01;2019-04-22;DRUG_ITEMS;1;
+DNPR;Danish national patient register;1995-01-01;2019-04-22;DRUG_ITEMS;2;
+LMS;Register of Medicinal Product Statistics;1995-01-01;2019-05-09;DRUG_ITEMS;4;
+DAR;Danish cause of death register;1970-01-01;2018-12-31;CLINICAL_ITEMS;9;
+CAR;Danish cancer register;1943-01-01;2018-12-31;CLINICAL_ITEMS;7;
+CPR;Central person register;1968-01-01;2019-06-11;;;

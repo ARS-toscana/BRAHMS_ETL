@@ -1,0 +1,54 @@
+
+###########################################################
+# insert name of your DAP (i.e. "ARS","DepLazio","Messina")
+DAP<-"ARS"
+###########################################################
+
+
+# Call library:
+if (!require("data.table")) install.packages("data.table")
+library(data.table)
+if (!require("haven")) install.packages("haven")
+library(haven)
+if (!require("lubridate")) install.packages("lubridate")
+library(lubridate)
+if (!require("stringr")) install.packages("stringr")
+library(stringr)
+
+# Define folders:
+diroutput<-paste0(thisdir,"/20210526_BRAHMS_CDM/")
+dirinput<-paste0(thisdir,"/20210525_TheShinISS_CDM/")
+dirtemp<-paste0(thisdir,"/temp/")
+
+# Check if those folders exist
+if (file.exists(diroutput)){
+  setwd(file.path(diroutput))
+} else {
+  suppressWarnings(dir.create(file.path( diroutput)))
+  setwd(file.path(diroutput))
+}
+
+if (file.exists(dirtemp)){
+  setwd(file.path(dirtemp))
+} else {
+  suppressWarnings(dir.create(file.path(dirtemp)))
+  setwd(file.path(dirtemp))
+}
+
+setwd(thisdir)
+
+# Define parameters:
+date_format<-"%Y%m%d"
+date_end<-"9999-12-31"
+end_study<-as.Date("2020-12-31")
+# upper_date<- as.Date(as.character(20160630), date_format)
+# lower_date<- as.Date(as.character(20110601), date_format)
+# lookback<-5*365.25
+# fup<-3*365.25
+
+
+##Define study parameters
+derm_specility_sdo<-c("52") #inizia per 52
+derm_specility_spa<-c("52") #reparto 052
+
+
