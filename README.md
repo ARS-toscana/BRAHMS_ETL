@@ -15,7 +15,7 @@ Lo script richiama inizialmente un file di parametri (_parameters_toBrahms.R_) a
 
 
 Il programma è diviso in 7 sezioni: 
- - le prime 6 elaborano ognuna della tebelle di TheShinISS CDM (_RICOVERI_OSPEDALIERI_, _SPECIALISTICA_, _PRONTO_SOCCORSO_, _ESENZIONI_, _PRESCRIZIONI_FARMACI_ e _ANANGRAFE_ASSISTITI_.) al Brahms CDM;
+ - le prime 6 elaborano ognuna della tabelle di TheShinISS CDM (_RICOVERI_OSPEDALIERI_, _SPECIALISTICA_, _PRONTO_SOCCORSO_, _ESENZIONI_, _PRESCRIZIONI_FARMACI_ e _ANANGRAFE_ASSISTITI_.) al Brahms CDM;
  - la settima 'appende' tutti i file delle stesso CDM tables per crearne una unica.
 
 
