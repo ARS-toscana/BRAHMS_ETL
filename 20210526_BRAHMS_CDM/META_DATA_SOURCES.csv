@@ -1,7 +1,0 @@
-source,source_name,source_from_date,source_to_date,item_table_contrib,item_setting_contrib,comments
-PRESCRIZIONI_FARMACI,dispensed drugs registry,2003-01-01,2020-12-31,drug_items,4,
-PRESCRIZIONI_FARMACI,dispensed drugs registry,2003-01-01,2020-12-31,drug_items,5,
-RICOVERI_OSPEDALIERI,discharge hospital records,2003-01-01,2020-12-31,clinical_items,1,
-ESENZIONI,exemption disease for copayment,2003-01-01,2020-12-31,clinical_items,10,
-PRONTO_SOCCORSO,emergency room access,2003-01-01,2020-12-31,clinical_items,3,
-SPECIALISTICA,outpatient visits,2003-01-01,2020-12-31,clinical_items,6,
