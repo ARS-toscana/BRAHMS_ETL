@@ -133,11 +133,12 @@ for (source in spa){
 
   setnames(pluto, old="IDUNI",new="id")
   setnames(pluto, old="DATAINI",new="dataprest")
-  setnames(pluto, old="SPECIALI",new="codbranca")
+  setnames(pluto, old="SPECIALI",new="codbranca") 
   setnames(pluto, old="CODPRES",new="codprest")
-
   #patesen	Esenzione per patologia
   
+  #togliere 0 davanti
+  pippo<-pluto[substr(codbranca,0,1)==0 & nchar(codbranca)>1, codbranca:=substr(codbranca,2,3)]
   
   pippo<-pippo[,.(id,codprest,dataprest,codbranca)] #, patesen
   
@@ -160,7 +161,10 @@ PS <- as.data.table(read_dta(paste0(dirinput,"/PS.dta")))
 setkeyv(PS,"IDUNI")
 
 
-PRONTO_SOCCORSO<-PS
+PRONTO_SOCCORSO<-PS[ESITO=="1" |ESITO=="V",tipdim:="0"]
+PRONTO_SOCCORSO<-PRONTO_SOCCORSO[ESITO=="2" |ESITO=="3" |ESITO=="8" |ESITO=="A",tipdim:="1"]
+PRONTO_SOCCORSO<-PRONTO_SOCCORSO[ESITO=="4" | ESITO=="9",tipdim:="2"]
+PRONTO_SOCCORSO<-PRONTO_SOCCORSO[ESITO=="5"| ESITO=="6"|ESITO=="7" |ESITO=="99" |ESITO=="03" |ESITO=="14"|ESITO=="29"|ESITO=="2A"|ESITO=="0"| ESITO=="", tipdim:="3"]
 
 # rename variables:
 setnames(PRONTO_SOCCORSO, old = "IDUNI", new = "id")
@@ -171,7 +175,8 @@ setnames(PRONTO_SOCCORSO, old = "COD_DIAGNOSI_ARSNEW", new = "codcmp") #DIAGNOSI
 # setnames(PRONTO_SOCCORSO, old = "DIAGNOSI_PRINC", new = "codcmp")
 # setnames(PRONTO_SOCCORSO, old = "DIAGNOSI_PRINC", new = "codcmp")
 # setnames(PRONTO_SOCCORSO, old = "DIAGNOSI_PRINC", new = "codcmp")
-setnames(PRONTO_SOCCORSO, old = "ESITO", new = "tipdim")
+#setnames(PRONTO_SOCCORSO, old = "ESITO", new = "tipdim")
+
 
 # keep only needed variables
 PRONTO_SOCCORSO<-PRONTO_SOCCORSO[,.(id, data_a, data_d, codcmp, tipdim)] #codcm1, codcm2, codcm3, codcm4,
@@ -244,11 +249,16 @@ rm(EXE)
 # rm(SALM)
 
 # 6.  Use FED to populate PRESCRIZIONI_FARMACI  --------------------------------------------
+COD_FARMACI_SPF <- fread(paste0(dirinput,"COD_FARMACI_SPF.csv"))
+COD_FARMACI_SPF<-COD_FARMACI_SPF [,.(COD_PRESTAZIONE, GG)]
+setnames(COD_FARMACI_SPF, "COD_PRESTAZIONE", "aic")
 
 for (source in fed){
   pippo <- as.data.table(read_dta(paste0(dirinput,source,".dta")))
   assign(source,pippo)
   setkeyv(pippo,"IDUNI")
+  
+  pippo[is.na(PEZZI_ARSNEW),PEZZI_ARSNEW:=1]
   
   setnames(pippo, old="IDUNI",new="id")
   setnames(pippo, old="DATAERO",new="datasped")
@@ -256,17 +266,27 @@ for (source in fed){
   setnames(pippo, old="PEZZI_ARSNEW",new="pezzi")
   setnames(pippo, old="COD_ATC5",new="atc")
   
+  #added new variable for provenance
+  pippo<-pippo[,origine:="FED"]
+  pippone<-pippo[,GG:=gsub("\\,",".",GG)]
+  pippone<-pippone[,GG:=as.numeric(GG)]
+  
+  # # calcolo ddd:
+  # COD_FARMACI_SPF<-COD_FARMACI_SPF[,aic:=as.character(aic)]
+  # COD_FARMACI_SPF<-COD_FARMACI_SPF[nchar(aic)<10,aic:=str_pad(aic, 10, pad = 0)]
 
-  pippo<-pippo[,.(id,datasped,aic,atc,pezzi)] 
+  # pippone<-merge(pippone, COD_FARMACI_SPF, by="aic", all.x = T)
+  pippone<-pippone[,ddd:=GG*pezzi]
   
+  pippone<-pippone[,.(id,datasped,aic,atc,pezzi,origine,ddd)] 
   
-  assign(paste0("PRESCRIZIONI_FARMACI_",substr(source,4,7)),pippo)
-  setkeyv(pippo,"id")
+  assign(paste0("PRESCRIZIONI_FARMACI_",substr(source,4,7)),pippone)
+  setkeyv(pippone,"id")
   
-  fwrite(pippo, paste0(diroutput,"/",paste0("PRESCRIZIONI_FARMACI_FED_",substr(source,4,7)),".csv"), quote = "auto")
+  fwrite(pippone, paste0(diroutput,"/",paste0("PRESCRIZIONI_FARMACI_FED_",substr(source,4,7)),".csv"), quote = "auto")
   
 }
-rm(pippo)
+rm(pippo, pippone)
 
 
 rm(list=ls(pattern="^FED"))
@@ -287,8 +307,9 @@ rm(list=ls(pattern="^PRESCRIZIONI_FARMACI"))
 #   setnames(pippo, old="COD_ATC5",new="atc")
 
 #   
-#   
-#   pippo<-pippo[,.(id,dataprest,aic,atc,pezzi)] 
+#   #added new variable for provenance
+#   pippo<-pippo[,origine:="FED"]
+#   pippo<-pippo[,.(id,dataprest,aic,atc,pezzi,origine)] #ddd
 #   
 #   
 #   assign(paste0("PRESCRIZIONI_FARMACI_",substr(source,4,7)),pippo)
@@ -311,23 +332,37 @@ for (source in spf){
   assign(source,pippo)
   setkeyv(pippo,"IDUNI")
   
+  pippo[is.na(NUMFARM),NUMFARM:=1]
+  
   setnames(pippo, old="IDUNI",new="id")
   setnames(pippo, old="DATAERO",new="datasped")
   setnames(pippo, old="CODFARM",new="aic")
   setnames(pippo, old="NUMFARM",new="pezzi")
   setnames(pippo, old="COD_ATC5",new="atc")
   
+  #added new variable for provenance
+  pippo<-pippo[,origine:="SPF"]
   
-  pippo<-pippo[,.(id,datasped,aic,atc,pezzi)] 
+  # # calcolo ddd:
+  COD_FARMACI_SPF<-COD_FARMACI_SPF[,aic:=as.character(aic)]
+  COD_FARMACI_SPF<-COD_FARMACI_SPF[nchar(aic)<10,aic:=str_pad(aic, 10, pad = 0)]
+
+  pippone<-merge(pippo, COD_FARMACI_SPF, by="aic", all.x = T)
+  
+  pippone<-pippone[,GG:=gsub("\\,",".",GG)]
+  pippone<-pippone[,GG:=as.numeric(GG)]
+  pippone<-pippone[,ddd:=GG*pezzi]
+  
+  pippone<-pippone[,.(id,datasped,aic,atc,pezzi,origine,ddd)] 
   
   
-  assign(paste0("PRESCRIZIONI_FARMACI_",substr(source,4,7)),pippo)
-  setkeyv(pippo,"id")
+  assign(paste0("PRESCRIZIONI_FARMACI_",substr(source,4,7)),pippone)
+  setkeyv(pippone,"id")
   
-  fwrite(pippo, paste0(diroutput,"/",paste0("PRESCRIZIONI_FARMACI_SPF_",substr(source,4,7)),".csv"), quote = "auto")
+  fwrite(pippone, paste0(diroutput,"/",paste0("PRESCRIZIONI_FARMACI_SPF_",substr(source,4,7)),".csv"), quote = "auto")
   
 }
-rm(pippo)
+rm(pippo, pippone)
 
 
 rm(list=ls(pattern="^PRESCRIZIONI_FARMACI"))

@@ -5,6 +5,8 @@ if (!require("haven")) install.packages("haven")
 library(haven)
 if (!require("lubridate")) install.packages("lubridate")
 library(lubridate)
+if (!require("stringr")) install.packages("stringr")
+library(stringr)
 
 # Define folders:
 diroutput<-paste0(thisdir,"/20210525_TheShinISS_CDM/")

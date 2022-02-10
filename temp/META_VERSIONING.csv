@@ -1,0 +1,2 @@
+cdm_instance_name;cdm_version;transformation_date;raw_data_version;transformation_program_version;transformation_documentation
+BRAHMS_PASS;V.6.0;2022-01-18;20210525_TheShinISS_CDM;brahms_cdm_transformation_v2.0;ETL_v1.0

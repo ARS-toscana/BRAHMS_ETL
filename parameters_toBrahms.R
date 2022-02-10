@@ -28,6 +28,7 @@ if (file.exists(diroutput)){
   setwd(file.path(diroutput))
 }
 
+
 if (file.exists(dirtemp)){
   setwd(file.path(dirtemp))
 } else {
@@ -48,7 +49,15 @@ end_study<-as.Date("2020-12-31")
 
 
 ##Define study parameters
-derm_specility_sdo<-c("52") #inizia per 52
-derm_specility_spa<-c("52") #reparto 052
+derm_specility_sdo<-c("52") #inizia per 52 in repartodim
+derm_specility_spa<-c("52") #reparto 52 in codbranca
 
-
+psi_speciality_sdo<-c("40")
+psi_speciality_spa<-c("40")
+onco_speciality_sdo<-c("64")
+onco_speciality_spa<-c("64")
+surg_speciality_sdo<-c("06","07","09","10","11","12","13","14")
+surg_speciality_spa<-c("06","07","09","10","11","12","13","14")
+int_med_speciality_sdo<-c("26")
+int_med_speciality_spa<-c("26")
+  
