@@ -19,7 +19,9 @@ Il programma è diviso in 7 sezioni:
  - l'ultima 'appende' tutti i file delle stesso CDM tables per crearne una unica.
 
 
-Per l'esecuzione di prova, NON è NECESSARIO FARE NESSUNA MODIFICA, si può eseguire tutto lo script _01-07_ETL_Brahms_v1.R_ e trovate le tabelle Brahms CDM nella cartella 
+
+
+**Per l'esecuzione di prova NON è NECESSARIO FARE NESSUNA MODIFICA**, si può eseguire tutto lo script _01-07_ETL_Brahms_v1.R_ e trovare le tabelle Brahms CDM nella cartella **20220210_BRAHMS_CDM**
 
 
 
