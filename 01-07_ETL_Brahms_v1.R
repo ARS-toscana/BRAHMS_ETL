@@ -577,7 +577,7 @@ DRUG_ITEMS_all<-DRUG_ITEMS_all[person_id%in%unique(PERSONS_all$person_id)]
 fwrite(DRUG_ITEMS_all, paste0(diroutput,"/DRUG_ITEMS.csv"), quote = "auto")
 rm(DRUG_ITEMS_all)
 
-rm(PERSONS_all, OBSERVATION_PERIODS_all, ENCOUNTERS_all, CLINICAL_ITEMS_all, ENCOUNTERS, PERSONS)
+rm(PERSONS_all, OBSERVATION_PERIODS_all, ENCOUNTERS_all, CLINICAL_ITEMS_all, ENCOUNTERS)
 
 
 ## META* tables
