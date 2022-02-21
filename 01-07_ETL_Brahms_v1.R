@@ -538,24 +538,24 @@ CLINICAL_ITEMS_all<-CLINICAL_ITEMS_all[encounter_id%in%unique(ENCOUNTERS_all$enc
 fwrite(CLINICAL_ITEMS_all, paste0(diroutput,"/CLINICAL_ITEMS.csv"), quote = "auto")
 
 
-#MISC_ITEMS
-MISC_ITEMS_table<- files_temp[str_detect(files_temp,"^MISC_ITEMS")]
-
-MISC_ITEMS_all<-c()
-for (source in MISC_ITEMS_table){
-  
-  print(source)
-  pippo <- fread(paste0(dirtemp,source,".csv"))
-  
-  MISC_ITEMS_all<-rbind(MISC_ITEMS_all, pippo)
-  rm(pippo)
-}  
-
-#check whether person_id are all in PERSONS
-MISC_ITEMS_all<-MISC_ITEMS_all[person_id%in%unique(PERSONS_all$person_id)]
-
-fwrite(MISC_ITEMS_all, paste0(diroutput,"/MISC_ITEMS.csv"), quote = "auto")
-rm(MISC_ITEMS_all)
+# #MISC_ITEMS
+# MISC_ITEMS_table<- files_temp[str_detect(files_temp,"^MISC_ITEMS")]
+# 
+# MISC_ITEMS_all<-c()
+# for (source in MISC_ITEMS_table){
+#   
+#   print(source)
+#   pippo <- fread(paste0(dirtemp,source,".csv"))
+#   
+#   MISC_ITEMS_all<-rbind(MISC_ITEMS_all, pippo)
+#   rm(pippo)
+# }  
+# 
+# #check whether person_id are all in PERSONS
+# MISC_ITEMS_all<-MISC_ITEMS_all[person_id%in%unique(PERSONS_all$person_id)]
+# 
+# fwrite(MISC_ITEMS_all, paste0(diroutput,"/MISC_ITEMS.csv"), quote = "auto")
+# rm(MISC_ITEMS_all)
 
 
 #DRUG_ITEMS
