@@ -29,12 +29,12 @@ if (file.exists(diroutput)){
 }
 
 
-if (file.exists(dirtemp)){
-  setwd(file.path(dirtemp))
-} else {
-  suppressWarnings(dir.create(file.path(dirtemp)))
-  setwd(file.path(dirtemp))
-}
+# if (file.exists(dirtemp)){
+#   setwd(file.path(dirtemp))
+# } else {
+#   suppressWarnings(dir.create(file.path(dirtemp)))
+#   setwd(file.path(dirtemp))
+# }
 
 setwd(thisdir)
 

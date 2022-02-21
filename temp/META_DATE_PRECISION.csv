@@ -1,0 +1,7 @@
+table_name;date_variable;item_setting;item_table;precision_from_date;precision_to_date;date_precision;date_imputation;comments
+CLINICAL_ITEMS;clin_item_date;1;clinical_items;2003-01-01;2020-12-31;1;1;
+CLINICAL_ITEMS;clin_item_date;10;clinical_items;2003-01-01;2020-12-31;1;1;
+CLINICAL_ITEMS;clin_item_date;3;clinical_items;2003-01-01;2020-12-31;1;1;
+CLINICAL_ITEMS;clin_item_date;6;clinical_items;2003-01-01;2020-12-31;1;1;
+DRUG_ITEMS;drug_item_date;4;drug_items;2003-01-01;2020-12-31;1;1;
+DRUG_ITEMS;drug_item_date;5;drug_items;2003-01-01;2020-12-31;1;1;
