@@ -21,7 +21,7 @@ Il programma è diviso in 7 sezioni:
 
 
 
-**Per l'esecuzione di prova NON è NECESSARIO FARE NESSUNA MODIFICA**, si esegue tutto lo script _01-07_ETL_Brahms_v1.R_ e si trovano le tabelle Brahms CDM nella cartella **20220210_BRAHMS_CDM**
+**Per l'esecuzione di prova NON è NECESSARIO FARE NESSUNA MODIFICA**, si esegue tutto lo script _01-07_ETL_Brahms_v1.R_ e si trovano le tabelle Brahms CDM nella cartella **CDMtables**
 
 
 
