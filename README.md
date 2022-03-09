@@ -3,7 +3,8 @@ ETL dal CDM TheShinISS all'CDM BRAHMS
 
 ## Istruzioni
 
-All'interno di questa repository trovate lo script R (_01-07_ETL_Brahms_v2.R_) che trasforma i dati al CDM Brahms.
+All'interno di questa repository trovate lo script R (**_01-07_ETL_Brahms_v2.R_**) che trasforma i dati al CDM Brahms.
+(la versione precendente _01-07_ETL_Brahms_v2.R_ è nella cartella old)
 
 Lo script richiama inizialmente un file di parametri (_parameters_toBrahms_v2.R_) all'interno del quale:
  - si fissa il nome del DAP (riga 4), che sarà necessario cambiare con l'estrazione reale 
