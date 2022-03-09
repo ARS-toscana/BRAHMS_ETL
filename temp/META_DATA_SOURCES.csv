@@ -1,7 +1,7 @@
-source;source_name;source_from_date;source_to_date;item_table_contrib;item_setting_contrib;comments
-PRESCRIZIONI_FARMACI;dispensed drugs registry;2003-01-01;2020-12-31;DRUG_ITEMS;4;
-PRESCRIZIONI_FARMACI;dispensed drugs registry;2003-01-01;2020-12-31;DRUG_ITEMS;5;
-RICOVERI_OSPEDALIERI;discharge hospital records;2003-01-01;2020-12-31;CLINICAL_ITEMS;1;
-ESENZIONI;exemption disease for copayment;2003-01-01;2020-12-31;CLINICAL_ITEMS;10;
-PRONTO_SOCCORSO;emergency room access;2003-01-01;2020-12-31;CLINICAL_ITEMS;3;
-SPECIALISTICA;outpatient visits;2003-01-01;2020-12-31;CLINICAL_ITEMS;6;
+source,source_name,source_from_date,source_to_date,item_table_contrib,item_setting_contrib,comments
+PRESCRIZIONI_FARMACI,dispensed drugs registry,2003-01-01,2021-08-31,DRUG_ITEMS,5,
+PRESCRIZIONI_FARMACI,dispensed drugs registry,2003-01-01,2021-08-31,DRUG_ITEMS,2,
+RICOVERI_OSPEDALIERI,discharge hospital records,2003-01-01,2021-08-31,CLINICAL_ITEMS,1,
+ESENZIONI,exemption disease for copayment,2003-01-01,2021-08-31,CLINICAL_ITEMS,10,
+PRONTO_SOCCORSO,emergency room access,2003-01-01,2021-08-31,CLINICAL_ITEMS,3,
+SPECIALISTICA,outpatient visits,2003-01-01,2021-08-31,CLINICAL_ITEMS,6,
