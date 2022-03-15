@@ -9,9 +9,9 @@ All'interno di questa repository trovate lo script R (**_01-07_ETL_Brahms_v2.R_*
 Lo script richiama inizialmente un file di parametri (_parameters_toBrahms_v2.R_) all'interno del quale:
  - si fissa il nome del DAP (riga 4), che sarà necessario cambiare con l'estrazione reale 
  - si richiamano le librerie necessarie (9-16)
- - si fissano le directory (19-39), che sarà adattare cambiare per l'estrazione reale
- - si fissano i parametri per le date (42-44)
- - si definiscono i codici per le specialità (52-62)
+ - si fissano le directory (19-42), che sarà adattare cambiare per l'estrazione reale
+ - si fissano i parametri per le date (44-46)
+ - si definiscono i codici per le specialità (60-70)
 
 
 
