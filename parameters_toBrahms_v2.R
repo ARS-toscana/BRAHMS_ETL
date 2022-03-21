@@ -23,8 +23,8 @@ diroutput<-paste0(dirbase,"CDMtables/")
 dirinput<-paste0(thisdir,"/20210525_TheShinISS_CDM/")
 # dirinput<-paste0(dirbase,"2202/")
 # dirtemp<-paste0(thisdir,"/temp/")
-dirtemp<-paste0(dirbase,"temp/")
-dirmacro <- paste0(dirbase,"p_macro/")
+dirtemp<-paste0(dirbase,"/temp")
+dirmacro <- paste0(dirbase,"/p_macro/")
 
 # Check if those folders exist
 if (file.exists(diroutput)){
