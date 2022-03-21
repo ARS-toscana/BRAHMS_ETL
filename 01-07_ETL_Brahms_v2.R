@@ -23,7 +23,7 @@ files<-sub('\\.csv$', '', list.files(dirinput))
 # 1.	Use RICOVERI_OSPEDALIERI to populate CLINICAL_ITEMS, ENCOUNTERS, MISC_ITEMS --------
 
 # keep only RICOVERI_OSPEDALIERI in dirinput
-RICOVERI_OSPEDALIERI_table<- files[str_detect(files,"^sdo")]
+RICOVERI_OSPEDALIERI_table<- files[str_detect(files,"^RICOVERI_OSPEDALIERI")]
 
 for (source in RICOVERI_OSPEDALIERI_table){
   print(source)
@@ -72,7 +72,7 @@ for (source in RICOVERI_OSPEDALIERI_table){
   # keep only needed variables
   CLINICAL_ITEMS<-CLINICAL_ITEMS[,.(clin_item_id,clin_item_src_id,person_id,encounter_id,clin_item_code,item_classification,clin_item_datatype,clin_item_setting,clin_item_date)]
   
-  fwrite(CLINICAL_ITEMS, paste0(dirtemp,"/CLINICAL_ITEMS_",source,".csv"), quote = "auto")
+  fwrite(CLINICAL_ITEMS, paste0(dirtemp,"CLINICAL_ITEMS_",source,".csv"), quote = "auto")
   
   rm(CLINICAL_ITEMS,CLINICAL_ITEMS_,CLINICAL_ITEMS__)
   
@@ -107,7 +107,7 @@ for (source in RICOVERI_OSPEDALIERI_table){
 
   ENCOUNTERS<-ENCOUNTERS[,.(encounter_id, encounter_src_id, person_id,encounter_setting, encounter_start_date, encounter_end_date, encounter_derm_specialty,encounter_specialty, encounter_discharge_status,encounter_misc)]
   
-  fwrite(ENCOUNTERS, paste0(dirtemp,"/ENCOUNTERS_",source,".csv"), quote = "auto")
+  fwrite(ENCOUNTERS, paste0(dirtemp,"ENCOUNTERS_",source,".csv"), quote = "auto")
   
 }
 
@@ -116,7 +116,7 @@ rm(pippo, ENCOUNTERS)
 
 
 # 2.  Use SPECIALISTICA	to populate ENCOUNTERS, CLINICAL_ITEMS --------------
-SPECIALISTICA_table<- files[str_detect(files,"^spa")]
+SPECIALISTICA_table<- files[str_detect(files,"^SPECIALISTICA")]
 
 for (source in SPECIALISTICA_table){
   print(source)
@@ -158,7 +158,7 @@ for (source in SPECIALISTICA_table){
   # keep only needed variables
   CLINICAL_ITEMS<-CLINICAL_ITEMS[,.(clin_item_id,clin_item_src_id,person_id,encounter_id,clin_item_code,item_classification,clin_item_datatype,clin_item_setting,clin_item_date)]
   
-  fwrite(CLINICAL_ITEMS, paste0(dirtemp,"/CLINICAL_ITEMS_",source,".csv"), quote = "auto")
+  fwrite(CLINICAL_ITEMS, paste0(dirtemp,"CLINICAL_ITEMS_",source,".csv"), quote = "auto")
   
   ##ENCOUNTERS: 
   #For each record: create a record of ENCOUNTERS and label the records with a unique code stored in encounter id (primary key); copy the values of SPECIALISTICA into ENCOUNTERS according to the following table
@@ -190,7 +190,7 @@ for (source in SPECIALISTICA_table){
 
   ENCOUNTERS<-ENCOUNTERS[,.(encounter_id, encounter_src_id, person_id, encounter_setting,encounter_start_date, encounter_end_date, encounter_derm_specialty,encounter_specialty, encounter_discharge_status, encounter_misc)] 
   
-  fwrite(ENCOUNTERS, paste0(dirtemp,"/ENCOUNTERS_",source,".csv"), quote = "auto")
+  fwrite(ENCOUNTERS, paste0(dirtemp,"ENCOUNTERS_",source,".csv"), quote = "auto")
   
   rm(pippo)
   
@@ -202,7 +202,7 @@ rm(CLINICAL_ITEMS, ENCOUNTERS)
 
 # 3.  Use PRONTO_SOCCORSO to populate CLINICAL_ITEMS, ENCOUNTERS ------------------------------------------
 
-PRONTO_SOCCORSO_table<- files[str_detect(files,"^ps")]
+PRONTO_SOCCORSO_table<- files[str_detect(files,"^PRONTO_SOCCORSO")]
 
 for (source in PRONTO_SOCCORSO_table){
   print(source)
@@ -240,7 +240,7 @@ for (source in PRONTO_SOCCORSO_table){
   # keep only needed variables
   CLINICAL_ITEMS<-CLINICAL_ITEMS[,.(clin_item_id,clin_item_src_id,person_id,encounter_id,clin_item_code,item_classification,clin_item_datatype,clin_item_setting,clin_item_date)]
   
-  fwrite(CLINICAL_ITEMS, paste0(dirtemp,"/CLINICAL_ITEMS_",source,".csv"), quote = "auto")
+  fwrite(CLINICAL_ITEMS, paste0(dirtemp,"CLINICAL_ITEMS_",source,".csv"), quote = "auto")
   
   ##ENCOUNTERS: 
   #Action:  For each record: create a record of ENCOUNTERS and label the records with a unique numeric code stored in encounter id (primary key); copy the values of RICOVERI OSPEDALIERI into ENCOUNTERS according to the following table
@@ -265,7 +265,7 @@ for (source in PRONTO_SOCCORSO_table){
 
   ENCOUNTERS<-ENCOUNTERS[,.(encounter_id, encounter_src_id, person_id,encounter_setting,encounter_start_date, encounter_end_date, encounter_derm_specialty,encounter_specialty, encounter_discharge_status,encounter_misc)] 
   
-  fwrite(ENCOUNTERS, paste0(dirtemp,"/ENCOUNTERS_",source,".csv"), quote = "auto")
+  fwrite(ENCOUNTERS, paste0(dirtemp,"ENCOUNTERS_",source,".csv"), quote = "auto")
   
   
   rm(pippo)
@@ -275,7 +275,7 @@ rm(CLINICAL_ITEMS)
 
 # 4.  Use ESENZIONI to populate CLINICAL_ITEMS, ENCOUNTERS --OK! ------------------------------------------
 
-ESENZIONI_table<- files[str_detect(files,"^exe")]
+ESENZIONI_table<- files[str_detect(files,"^ESENZIONI")]
 
 
 for (source in ESENZIONI_table){
@@ -313,7 +313,7 @@ for (source in ESENZIONI_table){
   # keep only needed variables
   CLINICAL_ITEMS<-CLINICAL_ITEMS[,.(clin_item_id,clin_item_src_id,person_id,encounter_id,clin_item_code,item_classification,clin_item_datatype,clin_item_setting,clin_item_date)]
   
-  fwrite(CLINICAL_ITEMS, paste0(dirtemp,"/CLINICAL_ITEMS_",source,".csv"), quote = "auto")
+  fwrite(CLINICAL_ITEMS, paste0(dirtemp,"CLINICAL_ITEMS_",source,".csv"), quote = "auto")
   
   
   ##ENCOUNTERS: 
@@ -338,7 +338,7 @@ for (source in ESENZIONI_table){
 
   ENCOUNTERS<-ENCOUNTERS[,.(encounter_id, encounter_src_id, person_id,encounter_setting, encounter_start_date, encounter_end_date, encounter_derm_specialty,encounter_specialty, encounter_discharge_status,encounter_misc)] 
   
-  fwrite(ENCOUNTERS, paste0(dirtemp,"/ENCOUNTERS_",source,".csv"), quote = "auto")
+  fwrite(ENCOUNTERS, paste0(dirtemp,"ENCOUNTERS_",source,".csv"), quote = "auto")
   
   
   rm(pippo)
@@ -403,7 +403,7 @@ DRUG_ITEMS<-DRUG_ITEMS[origine=="spf",drug_item_setting:=5]
 DRUG_ITEMS<-DRUG_ITEMS[,.(drug_item_id,drug_item_src_id,person_id,encounter_id,drug_item_code,item_classification,drug_item_datatype,drug_item_setting,drug_item_npc,drug_item_presc_specialty,drug_item_date,drug_item_dosage_available,drug_item_quantity,drug_item_quantity_unit,drug_item_total_ddd,drug_item_presc_daily_dose,drug_item_days_supply,drug_item_strength,drug_item_strength_unit,drug_item_adm_route,drug_item_dose_form)] 
 
 
-fwrite(DRUG_ITEMS, paste0(dirtemp,"/DRUG_ITEMS.csv"), quote = "auto")
+fwrite(DRUG_ITEMS, paste0(dirtemp,"DRUG_ITEMS.csv"), quote = "auto")
 
 rm(DRUG_ITEMS, PRESCRIZIONI_FARMACI)
 
@@ -445,7 +445,7 @@ PERSONS<-PERSONS[death_date==".", death_date:=NA]
 # keep only needed vars.
 PERSONS<-unique(PERSONS[,.(person_id,person_id_src,birth_date,sex,death_date)])
 
-fwrite(PERSONS, paste0(dirtemp,"/PERSONS.csv"), quote = "auto")
+fwrite(PERSONS, paste0(dirtemp,"PERSONS.csv"), quote = "auto")
 
 
 
@@ -496,7 +496,7 @@ OBSERVATION_PERIODS<-OBSERVATION_PERIODS[str_detect(person_id,"^ANA"), person_id
 # keep only needed vars.
 OBSERVATION_PERIODS<-OBSERVATION_PERIODS[,.(obs_period_id,person_id,source,obs_period_start_date,obs_period_end_date,obs_period_end_reason)]
 
-fwrite(OBSERVATION_PERIODS, paste0(dirtemp,"/OBSERVATION_PERIODS.csv"), quote = "auto")
+fwrite(OBSERVATION_PERIODS, paste0(dirtemp,"OBSERVATION_PERIODS.csv"), quote = "auto")
 
 rm(ANAGRAFE_ASSISTITI, PERSONS, OBSERVATION_PERIODS, output_spells_category)
 
