@@ -353,7 +353,7 @@ rm(CLINICAL_ITEMS)
 #PRESCRIZIONI_FARMACI<-fread(paste0(dirinput,PRESCRIZIONI_FARMACI,".csv"), colClasses = list( character="id"))
 PRESCRIZIONI_FARMACI <- data.table()
 for (i in 1:length(files)) {
-  if (str_detect(files[i],"^fed") | str_detect(files[i],"^spf") ) {
+  if (str_detect(files[i],"^fed") | str_detect(files[i],"^spf") | str_detect(files[i],"^PRESCRIZIONI_FARMACI" ) ) {
     print(files[i])
     temp <- fread(paste0(dirinput,files[i],".csv"), colClasses = list( character="id"))
     temp <- temp [,origine:=files[i]]
@@ -441,7 +441,7 @@ setnames(PERSONS,"datadec","death_date")
 setnames(PERSONS,"sesso","sex")
 
 # transform right fotmat for death_date
-PERSONS<-PERSONS[death_date==".", death_date:=NA]
+PERSONS<-PERSONS[death_date=="." | death_date=="", death_date:=NA]
 # keep only needed vars.
 PERSONS<-unique(PERSONS[,.(person_id,person_id_src,birth_date,sex,death_date)])
 
