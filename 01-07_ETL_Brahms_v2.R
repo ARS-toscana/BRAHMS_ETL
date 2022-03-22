@@ -441,7 +441,7 @@ setnames(PERSONS,"datadec","death_date")
 setnames(PERSONS,"sesso","sex")
 
 # transform right fotmat for death_date
-PERSONS<-PERSONS[death_date=="." | death_date=="", death_date:=NA]
+PERSONS<-PERSONS[death_date=="", death_date:=NA] #death_date=="." |
 # keep only needed vars.
 PERSONS<-unique(PERSONS[,.(person_id,person_id_src,birth_date,sex,death_date)])
 
@@ -488,7 +488,7 @@ OBSERVATION_PERIODS<-OBSERVATION_PERIODS[obs_period_end_date==date_end, obs_peri
 OBSERVATION_PERIODS<-OBSERVATION_PERIODS[obs_period_end_date==death_date, obs_period_end_reason:=2]
 OBSERVATION_PERIODS<-OBSERVATION_PERIODS[(obs_period_end_date!=death_date | obs_period_end_date!=date_end ), obs_period_end_reason:=3] #| is.na(datadec)
 
-# transform right fotmat for person_id
+# transform right format for person_id
 OBSERVATION_PERIODS<-OBSERVATION_PERIODS[,person_id:=substr(person_id, 4,24)]
 OBSERVATION_PERIODS<-OBSERVATION_PERIODS[str_detect(person_id,"^ANA"), person_id:=substr(person_id, 4,24)]
 #OBSERVATION_PERIODS<-OBSERVATION_PERIODS[,person_id:=as.numeric(person_id)]
@@ -529,7 +529,7 @@ PERSONS_all<-merge(PERSONS_all, recode_PERSONS, by="person_id")
 PERSONS_all<-PERSONS_all[,-"person_id"]
 setnames(PERSONS_all,"new_person_id","person_id")
 PERSONS_all<-PERSONS_all[,.(person_id,person_id_src,birth_date,sex,death_date)]
-fwrite(PERSONS_all, paste0(diroutput,"/PERSONS.csv"), quote = "auto")
+fwrite(PERSONS_all, paste0(diroutput,"PERSONS.csv"), quote = "auto")
 
 
 #OBSERVATION_PERIODS
@@ -550,7 +550,7 @@ OBSERVATION_PERIODS_all<-merge(OBSERVATION_PERIODS_all, recode_PERSONS, by="pers
 OBSERVATION_PERIODS_all<-OBSERVATION_PERIODS_all[,-"person_id"]
 setnames(OBSERVATION_PERIODS_all,"new_person_id","person_id")
 OBSERVATION_PERIODS_all<-OBSERVATION_PERIODS_all[,.(obs_period_id,person_id,source,obs_period_start_date,obs_period_end_date,obs_period_end_reason)]
-fwrite(OBSERVATION_PERIODS_all, paste0(diroutput,"/OBSERVATION_PERIODS.csv"), quote = "auto")
+fwrite(OBSERVATION_PERIODS_all, paste0(diroutput,"OBSERVATION_PERIODS.csv"), quote = "auto")
 
 
 #ENCOUNTERS
@@ -578,7 +578,7 @@ ENCOUNTERS_all<-ENCOUNTERS_all[,.(encounter_id, encounter_src_id, person_id,enco
 #check whether person_id are all in PERSONS
 ENCOUNTERS_all<-ENCOUNTERS_all[person_id%in%unique(PERSONS_all$person_id)]
 
-fwrite(ENCOUNTERS_all, paste0(diroutput,"/ENCOUNTERS.csv"), quote = "auto")
+fwrite(ENCOUNTERS_all, paste0(diroutput,"ENCOUNTERS.csv"), quote = "auto")
 
 
 # CLINICAL_ITEMS, 
@@ -608,7 +608,7 @@ CLINICAL_ITEMS_all<-CLINICAL_ITEMS_all[person_id%in%unique(PERSONS_all$person_id
 #check whether encounter_id are all in ENCOUNTERS
 CLINICAL_ITEMS_all<-CLINICAL_ITEMS_all[encounter_id%in%unique(ENCOUNTERS_all$encounter_id)]
 
-fwrite(CLINICAL_ITEMS_all, paste0(diroutput,"/CLINICAL_ITEMS.csv"), quote = "auto")
+fwrite(CLINICAL_ITEMS_all, paste0(diroutput,"CLINICAL_ITEMS.csv"), quote = "auto")
 
 
 # #MISC_ITEMS
@@ -627,7 +627,7 @@ fwrite(CLINICAL_ITEMS_all, paste0(diroutput,"/CLINICAL_ITEMS.csv"), quote = "aut
 # #check whether person_id are all in PERSONS
 # MISC_ITEMS_all<-MISC_ITEMS_all[person_id%in%unique(PERSONS_all$person_id)]
 # 
-# fwrite(MISC_ITEMS_all, paste0(diroutput,"/MISC_ITEMS.csv"), quote = "auto")
+# fwrite(MISC_ITEMS_all, paste0(diroutput,"MISC_ITEMS.csv"), quote = "auto")
 # rm(MISC_ITEMS_all)
 
 
@@ -655,25 +655,25 @@ DRUG_ITEMS_all<-DRUG_ITEMS_all[,.(drug_item_id,drug_item_src_id,person_id,encoun
 DRUG_ITEMS_all<-DRUG_ITEMS_all[person_id%in%unique(PERSONS_all$person_id)]
 
 
-fwrite(DRUG_ITEMS_all, paste0(diroutput,"/DRUG_ITEMS.csv"), quote = "auto")
+fwrite(DRUG_ITEMS_all, paste0(diroutput,"DRUG_ITEMS.csv"), quote = "auto")
 
 
-rm(PERSONS_all, OBSERVATION_PERIODS_all, ENCOUNTERS_all, CLINICAL_ITEMS_all, ENCOUNTERS, DRUG_ITEMS_all, DRUG_ITEMS, recode_PERSONS)
+rm(PERSONS_all, OBSERVATION_PERIODS_all, ENCOUNTERS_all, CLINICAL_ITEMS_all, ENCOUNTERS, DRUG_ITEMS_all, recode_PERSONS)
 
 
 ## META* tables
 
 #META_VERSIONING
 META_VERSIONING <- fread(paste0(dirtemp,"META_VERSIONING.csv"))
-fwrite(META_VERSIONING, paste0(diroutput,"/META_VERSIONING.csv"), quote = "auto")
+fwrite(META_VERSIONING, paste0(diroutput,"META_VERSIONING.csv"), quote = "auto")
 rm(META_VERSIONING)
 
 #META_DATE_PRECISION
 META_DATE_PRECISION <- fread(paste0(dirtemp,"META_DATE_PRECISION.csv"))
-fwrite(META_DATE_PRECISION, paste0(diroutput,"/META_DATE_PRECISION.csv"), quote = "auto")
+fwrite(META_DATE_PRECISION, paste0(diroutput,"META_DATE_PRECISION.csv"), quote = "auto")
 rm(META_DATE_PRECISION)
 
 #META_DATA_SOURCES
 META_DATA_SOURCES <- fread(paste0(dirtemp,"META_DATA_SOURCES.csv"))
-fwrite(META_DATA_SOURCES, paste0(diroutput,"/META_DATA_SOURCES.csv"), quote = "auto")
+fwrite(META_DATA_SOURCES, paste0(diroutput,"META_DATA_SOURCES.csv"), quote = "auto")
 rm(META_DATA_SOURCES)
